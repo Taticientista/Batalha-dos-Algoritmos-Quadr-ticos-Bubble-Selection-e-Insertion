@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Benchmark em C11 comparando Bubble Sort, Selection Sort e Insertion Sort no modelo RAM.">
+  <title>Batalha dos Algoritmos Quadráticos</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#0b1020; --panel:#151d32; --text:#edf2ff; --muted:#aebbd5; --accent:#80aaff; --line:#2d3a57; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:radial-gradient(ellipse at top,#1a2b4c 0,var(--bg) 55%); color:var(--text); }
+    a { color:var(--accent); }
+    .wrap { width:min(100% - 2rem,1000px); margin:auto; }
+    header { padding:5rem 0 3rem; text-align:center; }
+    .eyebrow { color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem; }
+    h1 { font-size:clamp(2.2rem,6vw,4.2rem); line-height:1.08; margin:.7rem 0 1rem; }
+    .lead { max-width:720px; margin:0 auto; color:var(--muted); font-size:1.15rem; }
+    .badges { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin:1.5rem 0; }
+    .badge { border:1px solid var(--line); background:#10182b; border-radius:999px; padding:.25rem .7rem; font-size:.85rem; }
+    .actions { display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; margin-top:1.8rem; }
+    .btn { display:inline-block; text-decoration:none; font-weight:700; padding:.8rem 1.1rem; border-radius:.7rem; border:1px solid var(--line); }
+    .primary { background:var(--accent); color:#071126; border-color:var(--accent); }
+    section { padding:1.5rem 0 2rem; }
+    h2 { font-size:1.7rem; margin-bottom:.5rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:1rem; }
+    .card { padding:1.25rem; border:1px solid var(--line); border-radius:1rem; background:color-mix(in srgb,var(--panel) 92%,transparent); }
+    .card h3 { margin:.1rem 0 .5rem; }
+    .card p, .muted { color:var(--muted); }
+    code, pre { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+    pre { overflow:auto; padding:1rem; border:1px solid var(--line); border-radius:.8rem; background:#070b14; }
+    .note { border-left:3px solid var(--accent); padding:.8rem 1rem; background:var(--panel); color:var(--muted); }
+    footer { border-top:1px solid var(--line); padding:1.5rem 0 2.5rem; color:var(--muted); text-align:center; }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="eyebrow">Projeto 06 · Estrutura de Dados e Algoritmos</div>
+    <h1>⚔️ Batalha dos<br>Algoritmos Quadráticos</h1>
+    <p class="lead">Bubble Sort vs. Selection Sort vs. Insertion Sort — um benchmark em C11 para comparar comparações, movimentações e tempo de execução em condições controladas.</p>
+    <div class="badges">
+      <span class="badge">C11</span><span class="badge">Modelo RAM</span><span class="badge">Makefile</span><span class="badge">Licença MIT</span>
+    </div>
+    <div class="actions">
+      <a class="btn primary" href="README.md">Ler documentação</a>
+      <a class="btn" href="https://github.com/">Publicar no GitHub</a>
+    </div>
+  </header>
+  <main class="wrap">
+    <section>
+      <h2>🎯 Objetivo</h2>
+      <p>Executar os três algoritmos sobre cópias idênticas de vetores e relacionar a análise assintótica com medições práticas. O projeto não presume um vencedor: as conclusões devem ser baseadas nos resultados coletados.</p>
+      <div class="grid">
+        <article class="card"><h3>🫧 Bubble Sort</h3><p>Compara elementos adjacentes e pode interromper cedo quando o vetor já está ordenado.</p><strong>Melhor caso: O(n)</strong><br><strong>Pior caso: O(n²)</strong></article>
+        <article class="card"><h3>🎯 Selection Sort</h3><p>Seleciona o menor elemento restante e o posiciona na próxima posição.</p><strong>Comparações: O(n²)</strong><br><strong>Trocas: até n − 1</strong></article>
+        <article class="card"><h3>📥 Insertion Sort</h3><p>Insere cada elemento na posição correta dentro da parte já ordenada.</p><strong>Melhor caso: O(n)</strong><br><strong>Pior caso: O(n²)</strong></article>
+      </div>
+    </section>
+    <section>
+      <h2>🧪 Como executar</h2>
+      <p>Com GCC ou Clang, Make e Python 3 instalados:</p>
+      <pre><code>make
+make test
+./build/benchmark --help</code></pre>
+      <p class="muted">Consulte o README para as opções de benchmark, geração de CSV e análise dos resultados.</p>
+    </section>
+    <section>
+      <h2>📊 Resultados experimentais</h2>
+      <p>Os resultados dependem do hardware, compilador, flags de compilação, tamanho e distribuição dos dados. Registre e compare as medições reais em vez de preencher números estimados como se fossem resultados observados.</p>
+      <p class="note">Este site é uma página de apresentação. A metodologia, os comandos completos e a tabela para registrar resultados ficam no <a href="README.md">README.md</a>.</p>
+    </section>
+    <section>
+      <h2>📁 O que o projeto mede</h2>
+      <div class="grid">
+        <article class="card"><h3>Comparações</h3><p>Quantidade de comparações entre chaves durante a ordenação.</p></article>
+        <article class="card"><h3>Movimentações</h3><p>Escritas, deslocamentos ou trocas conforme a instrumentação adotada.</p></article>
+        <article class="card"><h3>Tempo</h3><p>Duração medida e registrada para comparar execuções sob as mesmas condições.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">Projeto educacional em C11 · Licença MIT · <a href="README.md">Documentação completa</a></div></footer>
+</body>
+</html>
